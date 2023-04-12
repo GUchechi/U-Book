@@ -4,16 +4,38 @@ import { useState } from "react";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [confirmpassword, setConfirmpassword] = useState(true);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     password: "",
     confirmpassword: "",
-    username: "", 
+    username: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      if (formData.password !== formData.confirmpassword) {
+        setConfirmpassword(false);
+      }
+    }
+  };
+
+  const resetForm = () => {
+    setConfirmpassword(true);
+    setFormData({
+      firstname: "",
+      lastname: "",
+      password: "",
+      confirmpassword: "",
+      username: "",
+    });
   };
 
   return (
@@ -30,7 +52,7 @@ const Auth = () => {
       {/* Right Side */}
 
       <div className="a__right">
-        <form className="infoForm authForm">
+        <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Sign Up" : "Log In"}</h3>
 
           {isSignUp && (
@@ -41,6 +63,7 @@ const Auth = () => {
                 className="infoInput"
                 name="firstname"
                 onChange={handleChange}
+                value={formData.firstname}
               />
               <input
                 type="text"
@@ -48,6 +71,7 @@ const Auth = () => {
                 className="infoInput"
                 name="lastname"
                 onChange={handleChange}
+                value={formData.lastname}
               />
             </div>
           )}
@@ -59,6 +83,7 @@ const Auth = () => {
               className="infoInput"
               name="username"
               onChange={handleChange}
+              value={formData.username}
             />
           </div>
 
@@ -69,6 +94,7 @@ const Auth = () => {
               className="infoInput"
               name="password"
               onChange={handleChange}
+              value={formData.password}
             />
             {isSignUp && (
               <input
@@ -77,13 +103,23 @@ const Auth = () => {
                 className="infoInput"
                 name="confirmpassword"
                 onChange={handleChange}
+                value={formData.confirmpassword}
               />
             )}
           </div>
+          <span
+            style={{ display: confirmpassword ? "none" : "block" }}
+            className="confirmPass"
+          >
+            * Confirm Password is not same
+          </span>
           <div>
             <span
               style={{ fontSize: "15px", cursor: "pointer" }}
-              onClick={() => setIsSignUp((prev) => !prev)}
+              onClick={() => {
+                setIsSignUp((prev) => !prev);
+                resetForm();
+              }}
             >
               {isSignUp
                 ? "Already have an account?  Login"
