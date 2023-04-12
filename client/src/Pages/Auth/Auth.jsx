@@ -9,7 +9,7 @@ const Auth = () => {
     lastname: "",
     password: "",
     confirmpassword: "",
-    username: "",
+    username: "", 
   });
 
   const handleChange = (e) => {
