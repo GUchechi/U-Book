@@ -1,10 +1,13 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { UilShutter } from "@iconscout/react-unicons";
 import "./Auth.css";
-import { useState } from "react";
+import { logIn, signUp } from "../../actions/AuthAction";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [confirmpassword, setConfirmpassword] = useState(true);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -21,9 +24,11 @@ const Auth = () => {
     e.preventDefault();
 
     if (isSignUp) {
-      if (formData.password !== formData.confirmpassword) {
-        setConfirmpassword(false);
-      }
+      formData.password === formData.confirmpassword
+        ? dispatch(signUp(formData))
+        : setConfirmpassword(false);
+    } else {
+      dispatch(logIn(formData));
     }
   };
 
