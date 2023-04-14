@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { UilShutter } from "@iconscout/react-unicons";
-import "./Auth.css";
+import { useDispatch } from "react-redux";
 import { logIn, signUp } from "../../actions/AuthAction";
+import "./Auth.css";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
