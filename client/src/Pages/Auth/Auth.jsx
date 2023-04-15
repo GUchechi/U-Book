@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UilShutter } from "@iconscout/react-unicons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "../../actions/AuthAction";
 import "./Auth.css";
 
@@ -8,6 +8,8 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [confirmpassword, setConfirmpassword] = useState(true);
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.authReducer.loading) 
+  console.log(loading)
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -132,9 +134,9 @@ const Auth = () => {
             </span>
           </div>
           <button className="button infoButton" type="Submit">
-            {isSignUp ? " Sign Up" : "Log In"}
+            {loading? "Loading..." : isSignUp ? " Sign Up" : "Log In"}
           </button>
-        </form>
+        </form> 
       </div>
     </div>
   );
