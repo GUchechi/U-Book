@@ -44,6 +44,12 @@ body {
   border: 2px solid var(--blue);
 }
 
+.button:disabled {
+  background: silver;
+  cursor: not-allowed;
+  color: var(--blue);
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

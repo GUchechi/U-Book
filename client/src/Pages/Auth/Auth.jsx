@@ -8,8 +8,7 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [confirmpassword, setConfirmpassword] = useState(true);
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.authReducer.loading) 
-  console.log(loading)
+  const loading = useSelector((state) => state.authReducer.loading);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -133,10 +132,14 @@ const Auth = () => {
                 : "Don't have an account?  Sign up"}
             </span>
           </div>
-          <button className="button infoButton" type="Submit">
-            {loading? "Loading..." : isSignUp ? " Sign Up" : "Log In"}
+          <button
+            className="button infoButton"
+            type="Submit"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : isSignUp ? " Sign Up" : "Log In"}
           </button>
-        </form> 
+        </form>
       </div>
     </div>
   );
