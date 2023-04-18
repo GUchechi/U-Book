@@ -24,6 +24,12 @@ const PostShare = () => {
     }
   };
 
+  // Reset Post
+  const reset = () => {
+    setImage(null);
+    desc.current.value = "";
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,6 +50,7 @@ const PostShare = () => {
       } catch (error) {}
     }
     dispatch(uploadPost(newPost));
+    reset();
   };
 
   return (
