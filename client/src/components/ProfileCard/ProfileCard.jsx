@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Cover from "../../img/cover.jpg";
 import Profile from "../../img/profileImg.jpg";
+import { Link } from "react-router-dom";
 import "./ProfileCard.css";
 
 const ProfileCard = () => {
@@ -62,7 +63,18 @@ const ProfileCard = () => {
         <hr />
       </div>
 
-      {ProfilePage ? "" : <span>My Profile</span>}
+      {ProfilePage ? (
+        ""
+      ) : (
+        <span>
+          <Link
+            to={`/profile/${user._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            My Profile
+          </Link>
+        </span>
+      )}
     </div>
   );
 };
