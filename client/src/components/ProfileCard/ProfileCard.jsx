@@ -19,7 +19,14 @@ const ProfileCard = () => {
           }
           alt=""
         />
-        <img src={Profile} alt="" />
+        <img
+          src={
+            user.profilePicture
+              ? serverPublic + user.profilePicture
+              : serverPublic + "defaultProfile.png"
+          }
+          alt=""
+        />
       </div>
 
       <div className="profileName">
