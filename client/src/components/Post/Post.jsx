@@ -1,13 +1,24 @@
+import { useSelector } from "react-redux";
+import { useState } from "react";
 import Comment from "../../img/comment.png";
 import Share from "../../img/share.png";
 import Heart from "../../img/like.png";
 import NotLike from "../../img/notlike.png";
-import { UilHeart } from "@iconscout/react-unicons";
+import { likePost } from "../../api/PostRequest";
 import "./Post.css";
-import { useSelector } from "react-redux";
+
 
 const Post = ({ data }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
+  const [liked, setLiked] = useState(data.likes.includes(user.id));
+  const [likes, setLikes] = useState(data.likes.length);
+
+  const handleLike = () => {
+    setLiked((prev) => !prev);
+    likePost(data._id, user._id);
+    liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
+  };
+
   return (
     <div className="post">
       <img
@@ -16,18 +27,18 @@ const Post = ({ data }) => {
       />
 
       <div className="postReact">
-        {data.liked ? (
-          <UilHeart size="35" style={{ marginTop: "-5px", color: "red" }} />
-        ) : (
-          <img src={NotLike} alt="likePng" />
-        )}
-        {/* <img src={data.liked ? Heart : NotLike} alt="likePng" /> */}
+        <img
+          src={liked ? Heart : NotLike}
+          alt="likePng"
+          style={{ cursor: "pointer" }}
+          onClick={handleLike}
+        />
         <img src={Comment} alt="commentsPng" />
         <img src={Share} alt="SharePng" />
       </div>
 
       <span style={{ color: "var(--gray)", fontSize: "15px" }}>
-        {data.likes} likes
+        {likes} likes
       </span>
 
       <div className="detail">
