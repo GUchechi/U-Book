@@ -4,15 +4,20 @@ import Heart from "../../img/like.png";
 import NotLike from "../../img/notlike.png";
 import { UilHeart } from "@iconscout/react-unicons";
 import "./Post.css";
+import { useSelector } from "react-redux";
 
 const Post = ({ data }) => {
+  const { user } = useSelector((state) => state.authReducer.authData);
   return (
     <div className="post">
-      <img src={data.img} alt="" />
+      <img
+        src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""}
+        alt=""
+      />
 
       <div className="postReact">
         {data.liked ? (
-          <UilHeart size="35" style={{ marginTop: "-5px", color: 'red' }} />
+          <UilHeart size="35" style={{ marginTop: "-5px", color: "red" }} />
         ) : (
           <img src={NotLike} alt="likePng" />
         )}
