@@ -12,6 +12,7 @@ import "./PostShare.css";
 const PostShare = () => {
   const [image, setImage] = useState(null);
   const loading = useSelector((state) => state.postReducer.uploading);
+  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const imageRef = useRef();
   const desc = useRef();
   const dispatch = useDispatch();
@@ -55,7 +56,14 @@ const PostShare = () => {
 
   return (
     <div className="postShare">
-      <img src={ProfileImage} alt="Profile img" />
+      <img
+        src={
+          user.profilePicture
+            ? serverPublic + user.profilePicture
+            : serverPublic + "defaultProfile.png"
+        }
+        alt="Profile img"
+      />
       <div>
         <input
           ref={desc}
