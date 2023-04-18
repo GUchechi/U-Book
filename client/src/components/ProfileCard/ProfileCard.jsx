@@ -4,11 +4,11 @@ import Profile from "../../img/profileImg.jpg";
 import { Link } from "react-router-dom";
 import "./ProfileCard.css";
 
-const ProfileCard = () => {
+const ProfileCard = ({ location }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state) => state.postReducer.posts);
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
-  const ProfilePage = false;
+
   return (
     <div className="profileCard">
       <div className="profileImages">
@@ -50,11 +50,13 @@ const ProfileCard = () => {
             <span>Followers</span>
           </div>
 
-          {ProfilePage && (
+          {location === "profilePage" && (
             <>
               <div className="vl"></div>
               <div className="follow">
-                <span>3</span>
+                <span>
+                  {posts.filter((post) => post.userId === user._id).length}
+                </span>
                 <span>Posts</span>
               </div>
             </>
@@ -63,7 +65,7 @@ const ProfileCard = () => {
         <hr />
       </div>
 
-      {ProfilePage ? (
+      {location === "profilePage" ? (
         ""
       ) : (
         <span>
