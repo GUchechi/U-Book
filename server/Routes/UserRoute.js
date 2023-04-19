@@ -9,6 +9,7 @@ import {
 
 const router = express.Router();
 
+// router.get('/', getAllUser)
 router.get("/:id", getUser);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);
