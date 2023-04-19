@@ -2,6 +2,8 @@ import { Modal } from "@mantine/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { uploadImage } from "../../actions/uploadAction";
+
 
 function ProfileModal({ modalOpened, setModalOpened, data }) {
   const { password, ...other } = data;
@@ -14,6 +16,47 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let UserData = formData;
+    if (profileImage) {
+      const data = new FormData();
+      const fileName = Date.now() + profileImage.name;
+      data.append("name", fileName);
+      data.append("file", profileImage);
+      UserData.profilePicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (coverImage) {
+      const data = new FormData();
+      const fileName = Date.now() + coverImage.name;
+      data.append("name", fileName);
+      data.append("file", coverImage);
+      UserData.coverPicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    dispatch(updateUser(param.id, UserData))
+    setModalOpened(false)
+  };
+
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      e.target.name === "profileImage"
+        ? setProfileImage(img)
+        : setCoverImage(img);
+    }
   };
 
   return (
@@ -93,12 +136,14 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
 
           <div>
             Profile Image
-            <input type="file" name="profileImage" />
+            <input type="file" name="profileImage" onChange={onImageChange} />
             Cover Image
-            <input type="file" name="coverImage" />
+            <input type="file" name="coverImage" onChange={onImageChange} />
           </div>
 
-          <button className="button infoButton">Update</button>
+          <button className="button infoButton" onClick={handleSubmit}>
+            Update
+          </button>
         </form>
       </Modal>
     </>
