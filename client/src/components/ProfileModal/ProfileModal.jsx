@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { uploadImage } from "../../actions/uploadAction";
-
+import { updateUser } from "../../actions/userAction";
 
 function ProfileModal({ modalOpened, setModalOpened, data }) {
   const { password, ...other } = data;
@@ -46,8 +46,8 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
       }
     }
 
-    dispatch(updateUser(param.id, UserData))
-    setModalOpened(false)
+    dispatch(updateUser(param.id, UserData));
+    setModalOpened(false);
   };
 
   const onImageChange = (e) => {
