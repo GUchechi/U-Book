@@ -19,6 +19,7 @@ const ProfileCard = ({ location }) => {
               : serverPublic + "defaultCover.png"
           }
           alt=""
+          className="coverPicture"
         />
         <img
           src={
@@ -27,6 +28,7 @@ const ProfileCard = ({ location }) => {
               : serverPublic + "defaultProfile.png"
           }
           alt=""
+          className="profilePicture"
         />
       </div>
 

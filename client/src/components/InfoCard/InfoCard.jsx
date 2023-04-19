@@ -59,7 +59,7 @@ const InfoCard = () => {
         <span>
           <b>Status </b>
         </span>
-        <span>{profileUser.relationShip}</span>
+        <span>{profileUser.relationship}</span>
       </div>
 
       <div className="info">

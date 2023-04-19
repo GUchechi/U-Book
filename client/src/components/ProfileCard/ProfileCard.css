@@ -21,11 +21,13 @@
 }
 
 .profileImages > img:nth-of-type(2) {
-  width: 6rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
   position: absolute;
   bottom: -3rem;
   box-shadow: var(--profileShadow);
+  
 }
 
 .profileName {
@@ -89,4 +91,12 @@
   align-self: center;
   margin-bottom: 1rem;
   cursor: pointer;
+}
+
+.coverPicture {
+  height: 20rem;
+}
+
+.profilePicture{
+  border-radius: 50%;
 }
