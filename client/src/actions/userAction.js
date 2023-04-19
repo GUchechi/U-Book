@@ -1,4 +1,4 @@
-import * as UserApi from "../api/UserRequests";
+import * as UserApi from "../api/UserRequest";
 
 
 export const updateUser=(id, formData)=> async(dispatch)=> {

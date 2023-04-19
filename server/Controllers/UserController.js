@@ -1,6 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
-import { Jwt } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 // Get a User
 export const getUser = async (req, res) => {
@@ -42,7 +42,7 @@ export const updateUser = async (req, res) => {
         { expiresIn: "1hr" }
       );
 
-      res.status(200).json(user, token);
+      res.status(200).json({ user: user, token: token });
     } catch (error) {
       res.status(500).json(error);
     }

@@ -76,7 +76,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             <input
               type="text"
               className="infoInput"
-              name="firstName"
+              name="firstname"
               placeholder="First Name"
               onChange={handleChange}
               value={formData.firstName}
@@ -85,7 +85,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             <input
               type="text"
               className="infoInput"
-              name="lastName"
+              name="lastname"
               placeholder="Last Name"
               onChange={handleChange}
               value={formData.lastName}
