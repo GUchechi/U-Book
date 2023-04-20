@@ -7,7 +7,7 @@ const User = ({ person }) => {
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useSelector((state) => state.authReducer.authData);
   const [following, setFollowing] = useState(
-    person.following.includes(user._id)
+    person.followers.includes(user._id)
   );
 
   const handleFollow = () => {
