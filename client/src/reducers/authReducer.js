@@ -26,6 +26,33 @@ const authReducer = (
     case "LOG_OUT":
       localStorage.clear();
       return { ...state, authData: null, loading: false, error: false };
+    case "FOLLOW_USER":
+      return {
+        ...state,
+        authData: {
+          ...state.authData,
+          user: {
+            ...state.authData.user,
+            following: [...state.authData.user.following, action.data],
+          },
+        },
+      };
+
+    case "UNFOLLOW_USER":
+      return {
+        ...state,
+        authData: {
+          ...state.authData,
+          user: {
+            ...state.authData.user,
+            following: [
+              ...state.authData.user.following.filter(
+                (personId) => personId !== action.data
+              ),
+            ],
+          },
+        },
+      };
     default:
       return state;
   }
