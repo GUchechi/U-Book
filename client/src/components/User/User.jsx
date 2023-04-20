@@ -15,8 +15,8 @@ const User = ({ person }) => {
           className="followerImage"
         />
         <div className="followerName">
-          <span>{person.name}</span>
-          <span>@{person.username}</span>
+          <span>{person.firstname}</span>
+          <span>{person.username}</span>
         </div>
       </div>
       <button className="button fc-button">Follow</button>
