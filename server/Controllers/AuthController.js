@@ -58,7 +58,7 @@ export const loginUser = async (req, res) => {
         res.status(200).json({ user, token });
       }
     } else {
-      res.status(404).json("user does not exist!!");
+      res.status(404).json("user does not exist");
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
