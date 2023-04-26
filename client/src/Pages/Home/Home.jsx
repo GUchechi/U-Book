@@ -8,7 +8,7 @@ const Home = () => {
     <div className="home">
       <ProfileSide />
       <PostSide />
-      <RightSide />
+      {/* <RightSide /> */}
     </div>
   );
 };
