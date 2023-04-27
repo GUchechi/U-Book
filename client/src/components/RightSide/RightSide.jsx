@@ -19,7 +19,9 @@ const RightSide = () => {
         </Link>
         <UilSetting size="26.5" />
         <img src={Noti} alt="" />
-        <img src={Comment} alt="" />
+        <Link to="../chat">
+          <img src={Comment} alt="" />
+        </Link>
       </div>
 
       <TrendCard />
