@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { getUser } from "../../api/UserRequest";
+import { format } from "timeago.js";
 
 const ChatBox = ({ chat, currentUser }) => {
   const [userData, setUserData] = useState(null);
