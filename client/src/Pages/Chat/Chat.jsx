@@ -9,6 +9,7 @@ import LogoSearch from "../../components/LogoSearch/LogoSearch";
 import { userChats } from "../../api/ChatRequest";
 import Conversation from "../../components/Conversation/Conversation";
 import "./Chat.css";
+import ChatBox from "../../components/ChatBox/ChatBox";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
