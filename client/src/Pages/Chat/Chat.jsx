@@ -16,8 +16,18 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [sendMessage, setSendMessage] = useState(null);
+  const [receiveMessage, setReceiveMessage] = useState(null);
   const socket = useRef();
   const { user } = useSelector((state) => state.authReducer.authData);
+
+  // Sending message to socket server
+
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.current.emit("send-message", sendMessage);
+    }
+  }, [sendMessage]);
 
   useEffect(() => {
     socket.current = io("http://localhost:8800");
@@ -27,6 +37,14 @@ const Chat = () => {
       console.log(onlineUsers);
     });
   }, [user]);
+
+  // Receiving message to socket server
+
+  useEffect(() => {
+    socket.current.on("receive-message", (data) => {
+      setReceiveMessage(data);
+    });
+  });
 
   // Get the chat in chat section
   useEffect(() => {
@@ -78,7 +96,12 @@ const Chat = () => {
           </div>
 
           {/* Chat Body */}
-          <ChatBox chat={currentChat} currentUser={user._id} />
+          <ChatBox
+            chat={currentChat}
+            currentUser={user._id}
+            setSendMessage={setSendMessage}
+            receiveMessage={receiveMessage}
+          />
         </div>
       </div>
     </div>
