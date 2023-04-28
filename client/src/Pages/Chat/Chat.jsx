@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { io } from "socket.io-client";
 import Noti from "../../img/noti.png";
 import Comment from "../../img/comment.png";
 import { UilEstate } from "@iconscout/react-unicons";
@@ -8,13 +9,24 @@ import { UilSetting } from "@iconscout/react-unicons";
 import LogoSearch from "../../components/LogoSearch/LogoSearch";
 import { userChats } from "../../api/ChatRequest";
 import Conversation from "../../components/Conversation/Conversation";
-import "./Chat.css";
 import ChatBox from "../../components/ChatBox/ChatBox";
+import "./Chat.css";
 
 const Chat = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const socket = useRef();
   const { user } = useSelector((state) => state.authReducer.authData);
+
+  useEffect(() => {
+    socket.current = io("http://localhost:8800");
+    socket.current.emit("new-user-add", user._id);
+    socket.current.on("get-users", (users) => {
+      setOnlineUsers(users);
+      console.log(onlineUsers);
+    });
+  }, [user]);
 
   // Get the chat in chat section
   useEffect(() => {
