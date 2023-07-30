@@ -19,18 +19,7 @@ export const registerUser = async (req, res) => {
     }
     const user = await newUser.save();
 
-    const token = jwt.sign(
-      {
-        username: user.username,
-        id: user._id,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: "1hr" }
-    );
-    res.status(200).json({ user, token });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+  
 };
 
 // Login User
